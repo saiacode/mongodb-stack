@@ -1,5 +1,8 @@
-version: '3.8'
+#MongoDB Stack
+#Single Node
+#Requires CODE
 
+version: '3.8'
 
 networks:
   mongodb-public:
@@ -25,7 +28,7 @@ services:
         reservations:
           cpus: '0.2'
           memory: 50M
-        placement:
-          constraints:
-            - node.labels.mongodb == v326 
+      placement:
+        constraints:
+          - node.labels.mongodb == v326 
 
