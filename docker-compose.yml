@@ -14,7 +14,7 @@ services:
     volumes:
       - data:/data/db
     ports:
-      - ${326_PORT}:27017
+      - "${326_PORT}:27017"
     networks:
       - mongodb-public
     deploy:
