@@ -9,17 +9,29 @@ networks:
     external: true
     
 volumes:
-  data:
+  v326_data:
+
+secrets:
+  mongo_initdb_root_username:
+    external: true
+  mongo_initdb_root_password:
+    external: true
   
 services:
   v326:
     image: mongo:3.2.6
     volumes:
-      - data:/data/db
+      - v326_data:/data/db
     ports:
       - "${CODE-52}326:27017"
     networks:
       - mongodb-public
+    secrets:
+      - mongo_initdb_root_username
+      - mongo_initdb_root_password
+    environment:
+      MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongo_intidb_root_username
+      MONGO_INITDB_ROOT_PASSWORD: /run/secrets/mongo_initdb_root_password
     deploy:
       resources:
         limits:
