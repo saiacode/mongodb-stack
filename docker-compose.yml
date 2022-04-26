@@ -42,5 +42,5 @@ services:
           memory: 50M
       placement:
         constraints:
-          - node.labels.mongodb == v326 
+          - node.labels.mongodb.v326 == 1 
 
