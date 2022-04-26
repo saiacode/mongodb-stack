@@ -31,7 +31,7 @@ services:
       - mongo_initdb_root_username
       - mongo_initdb_root_password
     environment:
-      MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongo_intidb_root_username
+      MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongo_initdb_root_username
       MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo_initdb_root_password
     deploy:
       resources:
@@ -56,7 +56,7 @@ services:
       - mongo_initdb_root_username
       - mongo_initdb_root_password
     environment:
-      MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongo_intidb_root_username
+      MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongo_initdb_root_username
       MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo_initdb_root_password
     deploy:
       resources:
