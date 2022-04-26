@@ -1,6 +1,6 @@
 #MongoDB Stack
 #Single Node
-#Requires CODE
+#Optional: CODE
 
 version: '3.8'
 
@@ -31,7 +31,7 @@ services:
       - mongo_initdb_root_password
     environment:
       MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongo_intidb_root_username
-      MONGO_INITDB_ROOT_PASSWORD: /run/secrets/mongo_initdb_root_password
+      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo_initdb_root_password
     deploy:
       resources:
         limits:
