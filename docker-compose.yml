@@ -5,8 +5,9 @@
 version: '3.8'
 
 networks:
-  mongodb-public:
+  public:
     external: true
+    name: ${PUBLIC_NET}
     
 volumes:
   v326_data:
@@ -26,7 +27,7 @@ services:
     ports:
       - "${CODE-52}507:27017"
     networks:
-      - mongodb-public
+      - public
     secrets:
       - mongo_initdb_root_username
       - mongo_initdb_root_password
