@@ -19,6 +19,9 @@ secrets:
   mongo_initdb_root_password:
     external: true
     name: ${MONGO_INITDB_ROOT_PASSWORD}
+  mongo_admin_url:
+    external: true
+    name: ${MONGO_ADMIN_URL}
   
 services:
   mongo:
