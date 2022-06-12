@@ -54,7 +54,10 @@ services:
 
   mongo-express:
     image: ${MONGO_EXPRESS_IMAGE}
-    restart: always
+    deploy:
+      placement:
+        constraints:
+          - node.labels.${NODE_LABEL} == 1     
     ports:
       - ${STACK_CODE}81:8081
     networks:
