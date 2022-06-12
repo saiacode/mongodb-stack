@@ -10,22 +10,23 @@ networks:
     name: ${PUBLIC_NET}
     
 volumes:
-  v326_data:
-  v507_data:
+  data:
 
 secrets:
   mongo_initdb_root_username:
     external: true
+    name: ${MONGO_INITDB_ROOT_USERNAME}
   mongo_initdb_root_password:
     external: true
+    name: ${MONGO_INITDB_ROOT_PASSWORD}
   
 services:
-  v507:
-    image: ${MONGO_507_IMAGE}
+  mongo:
+    image: ${MONGO_IMAGE}
     volumes:
-      - v507_data:/data/db
+      - data:/data/db
     ports:
-      - "${CODE-52}507:27017"
+      - "${STACK_CODE}17:27017"
     networks:
       - public
     secrets:
@@ -37,37 +38,28 @@ services:
     deploy:
       resources:
         limits:
-          cpus: ${MONGO_507_CPU_LIMIT}
-          memory: ${MONGO_507_MEMORY_LIMIT}
+          cpus: ${MONGO_CPU_LIMIT}
+          memory: ${MONGO_MEMORY_LIMIT}
         reservations:
-          cpus: ${MONGO_507_CPU_RESERVATION}
-          memory: ${MONGO_507_MEMORY_RESERVATION}
+          cpus: ${MONGO_CPU_RESERVATION}
+          memory: ${MONGO_MEMORY_RESERVATION}
       placement:
         constraints:
-          - node.labels.mongodb.v507 == 1 
-  v326:
-    image: ${MONGO_326_IMAGE}
-    volumes:
-      - v326_data:/data/db
+          - node.labels.${NODE_LABEL} == 1 
+
+  mongo-express:
+    image: ${MONGO_EXPRESS_IMAGE}
+    restart: always
     ports:
-      - "${STACK_CODE}326:27017"
+      - ${STACK_CODE}81:8081
     networks:
       - public
     secrets:
       - mongo_initdb_root_username
       - mongo_initdb_root_password
+      - mongo_admin_url
     environment:
-      MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongo_initdb_root_username
-      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo_initdb_root_password
-    deploy:
-      resources:
-        limits:
-          cpus: ${MONGO_326_CPU_LIMIT}
-          memory: ${MONGO_326_MEMORY_LIMIT}
-        reservations:
-          cpus: ${MONGO_326_CPU_RESERVATION}
-          memory: ${MONGO_326_MEMORY_RESERVATION}
-      placement:
-        constraints:
-          - node.labels.mongodb.v326 == 1 
+      ME_CONFIG_MONGODB_ADMINUSERNAME_FILE: /run/secrets/mongo_initdb_root_username
+      ME_CONFIG_MONGODB_ADMINPASSWORD_FILE: /run/secrets/mongo_initdb_root_password
+      ME_CONFIG_MONGODB_URL_FILE: /run/secrets/mongo_admin_url
 

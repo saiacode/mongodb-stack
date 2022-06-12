@@ -1,2 +1,2 @@
 # MongoDB Stack
-STACK_CODE: Código del stack de dos dígitos
+STACK_CODE: Código del stack de tres dígitos
