@@ -20,7 +20,7 @@ secrets:
   
 services:
   v507:
-    image: mongo:5.0.7
+    image: ${MONGO_507_IMAGE}
     volumes:
       - v507_data:/data/db
     ports:
@@ -36,22 +36,22 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1'
-          memory: 300M
+          cpus: ${MONGO_507_CPU_LIMIT}
+          memory: ${MONGO_507_MEMORY_LIMIT}
         reservations:
-          cpus: '0.2'
-          memory: 50M
+          cpus: ${MONGO_507_CPU_RESERVATION}
+          memory: ${MONGO_507_MEMORY_RESERVATION}
       placement:
         constraints:
           - node.labels.mongodb.v507 == 1 
   v326:
-    image: mongo:3.2.6
+    image: ${MONGO_326_IMAGE}
     volumes:
       - v326_data:/data/db
     ports:
-      - "${CODE-52}326:27017"
+      - "${STACK_CODE}326:27017"
     networks:
-      - mongodb-public
+      - public
     secrets:
       - mongo_initdb_root_username
       - mongo_initdb_root_password
@@ -61,11 +61,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1'
-          memory: 300M
+          cpus: ${MONGO_326_CPU_LIMIT}
+          memory: ${MONGO_326_MEMORY_LIMIT}
         reservations:
-          cpus: '0.2'
-          memory: 50M
+          cpus: ${MONGO_326_CPU_RESERVATION}
+          memory: ${MONGO_326_MEMORY_RESERVATION}
       placement:
         constraints:
           - node.labels.mongodb.v326 == 1 
