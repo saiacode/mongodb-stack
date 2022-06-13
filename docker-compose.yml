@@ -5,10 +5,7 @@
 version: '3.8'
 
 networks:
-  private:
   public:
-    external: true
-    name: ${PUBLIC_NET}
     
 volumes:
   data:
@@ -30,7 +27,6 @@ services:
       - "${STACK_CODE}17:27017"
     networks:
       - public
-      - private
     secrets:
       - mongo_initdb_root_username
       - mongo_initdb_root_password
